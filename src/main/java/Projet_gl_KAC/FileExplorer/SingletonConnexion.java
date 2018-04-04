@@ -18,7 +18,7 @@ public class SingletonConnexion {
 			e.printStackTrace();
 			System.out.println("erreur lors du chragement du drive !"+e.getMessage());
 		}
-		String url = "jdbc:mysql://localhost:3306/fileexplorer";
+		String url = "jdbc:mysql://127.0.0.1:3306/fileexplorer";
 		String utilisateur = "root";
 		String mdpass = "";
 		Connection conn = null;
