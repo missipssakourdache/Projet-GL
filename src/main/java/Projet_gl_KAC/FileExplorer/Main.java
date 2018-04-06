@@ -6,7 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		SingletonConnexion sc = new SingletonConnexion();
-		boolean connecte = sc. Connection("missi", "missi");
+		boolean connecte = sc.Connection("missii", "missi");
+		System.out.print(connecte);
 	}
 
 }

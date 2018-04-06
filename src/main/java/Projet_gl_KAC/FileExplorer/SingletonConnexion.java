@@ -13,12 +13,12 @@ public class SingletonConnexion {
 	protected boolean Connection(String nom, String mdp) {
 		boolean res =false;
 		try {
-			Class.forName("com.mysql.jdbc.driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("erreur lors du chragement du drive !"+e.getMessage());
+			System.out.println("erreur lors du chragement du drive !"+e.getMessage()+ "\n");
 		}
-		String url = "jdbc:mysql://127.0.0.1:3306/fileexplorer";
+		String url = "jdbc:mysql://localhost/fileexplorer";
 		String utilisateur = "root";
 		String mdpass = "";
 		Connection conn = null;
@@ -27,18 +27,23 @@ public class SingletonConnexion {
 		try {
 			conn = DriverManager.getConnection(url, utilisateur, mdpass);
 			statement = conn.createStatement();
-			resultat = statement.executeQuery("SELECT NOM_USER, MDP_USER FROM user;"); 
-			while (resultat.next()) {
-				String name = resultat.getString("NOM_USER");
-				String motDePasseUser = resultat.getString("MDP_USER");
-				   if (name.equals(nom) && motDePasseUser.equals(mdp)) { 
-					   System.out.println("inscrit");
-					   res = true;
-					   } else {
-						   System.out.println("pas inscrit");
-						   res = false;
-						   } 
-			}
+			resultat = statement.executeQuery("SELECT NOM_USER, MDP_USER FROM user;");
+			/* SI AUCUN USER DANS LA BASE DE DONNEES? AU REVOIR CAR NE FONCTIONNE PAS
+			if(resultat.equals(0)) {
+				System.out.println(" aucun utilisateur \n");
+			}else {*/
+				while (resultat.next()) {
+					String name = resultat.getString("NOM_USER");
+					String motDePasseUser = resultat.getString("MDP_USER");
+					   if (name.equals(nom) && motDePasseUser.equals(mdp)) { 
+						   System.out.println("inscrit \n");
+						   res = true;
+						   } else {
+							   System.out.println("pas inscrit");
+							   res = false;
+							   } 
+				}
+			//}
 		} catch(SQLException e) { 
 			System.out.println("Erreur lors de la connexion : <br/>" + 
 					e.getMessage()); 
